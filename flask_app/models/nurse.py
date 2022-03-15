@@ -23,24 +23,26 @@ class Nurse:
     @classmethod
     def create_nurse(cls,data):
         query = """
-        INSERT INTO nurses (first_name, last_name, email, password)
+        INSERT INTO nurses (first_name, last_name, email, password) 
         VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s)
         ;"""
-        results = connectToMySQL(cls.db).query_db(query, data)
+        results= connectToMySQL(cls.db).query_db(query, data)
         return results
 
-#     @classmethod
-#     def login_nurse(cls, data):
-#         this_nurse = cls.get_by_email(data['email'])
-#         if this_nurse:
-#             if bcrypt.check_password_has(this_nurse.password, data['password']):
-#                 session['first_name'] = this_nurse.first_name
-#                 session['nurse_id'] = this_nurse.id
-#         return this_nurse
-
-# # READ
     @classmethod
-    def read_by_email(cls, data):
+    def login_nurse(cls, data):
+        this_nurse = cls.read_by_email(data['email'])
+        if this_nurse:
+            if bcrypt.check_password_hash(this_nurse.password, data['password']):
+                session['first_name'] = this_nurse.first_name
+                session['nurse_id'] = this_nurse.id
+        return this_nurse
+
+
+# READ
+
+    @classmethod
+    def read_by_email(cls,data):
         query = """
         SELECT * FROM nurses WHERE email = %(email)s
         ;"""
@@ -49,16 +51,15 @@ class Nurse:
             return False
         return cls(results[0])
 
-#     @classmethod
-#     def get_by_username(cls,data):
-#         query = """
-#         SELECT * FROM nurses WHERE first_name = %(first_name)s
-#         ;"""
-#         results = connectToMySQL(cls.db).query_db(query, data)
-#         if len(results) < 1:
-#             return False
-#         else: 
-#             return cls(results[0])
+    @classmethod
+    def read_by_username(cls, data):
+        query = "SELECT * FROM nurses WHERE first_name = %(first_name)s;"
+        results = connectToMySQL(cls.db).query_db(query, data)
+        if len(results) < 1:
+            return False
+        else: 
+            return cls(results[0])
+
 
     @classmethod
     def read_by_id(cls, data):
@@ -67,7 +68,6 @@ class Nurse:
         ;"""
         results = connectToMySQL(cls.db).query_db(query, data)
         return cls(results[0])
-
 
     @staticmethod
     def validate_register(nurse):
@@ -92,5 +92,4 @@ class Nurse:
         if nurse['password'] != nurse['confirm']:
             flash("Passwords don't match!")
             is_valid = False
-        return is_valid
-        
+            return is_valid

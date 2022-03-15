@@ -15,35 +15,37 @@
         </div>
     </nav>
     <main class="container">
-        <div class="mt-5">
-            <label for="specialty">Specialty:</label>
-            <select name="specialty">
-                <option>ER</option>
-                <option>ICU</option>
-                <option>Med/Surg</option>
-                <option>Tele</option>
-            </select>
-            <label for="licenses" class="ms-5">State Licenses:</label>
-            <input type="text" style="width: 2.5rem">
-            <label class="ms-3">Compact?</label>
-            <input type="checkbox">
-        </div>
-        <div class="mt-5">
-            <label for="certification" class="certs">Certifications:</label>
-            <label>BLS</label>
-            <input type="checkbox">
-            <label>ACLS</label>
-            <input type="checkbox">
-            <label>PALS</label>
-            <input type="checkbox">
-            <label>TNCC</label>
-            <input type="checkbox">
-            <label>NIHSS</label>
-            <input type="checkbox">
-        </div>
-        <div>
-            <textarea name="skills" cols="30" rows="5" class="mt-5 mb-5">Skills...</textarea>
-        </div>
+        <form action="/nurses/skills" method="post">
+            <div class="mt-5">
+                <label for="specialty">Specialty:</label>
+                <select name="specialty">
+                    <option>ER</option>
+                    <option>ICU</option>
+                    <option>Med/Surg</option>
+                    <option>Tele</option>
+                </select>
+                <label for="licenses" class="ms-5">State Licenses:</label>
+                <input type="text" name="state_license" style="width: 2.5rem">
+                <label class="ms-3">Compact?</label>
+                <input type="checkbox" name="compact">
+            </div>
+            <div class="mt-5">
+                <label for="certification" class="certs">Certifications:</label>
+                <label>BLS</label>
+                <input type="checkbox">
+                <label>ACLS</label>
+                <input type="checkbox">
+                <label>PALS</label>
+                <input type="checkbox">
+                <label>TNCC</label>
+                <input type="checkbox">
+                <label>NIHSS</label>
+                <input type="checkbox">
+            </div>
+            <div>
+                <textarea name="skills" cols="30" rows="5" class="mt-5 mb-5">Skills...</textarea>
+            </div>
+        </form>
        <a href="" class="ms-5">Next: Choose your availability!</a>
     </main>
 </body>

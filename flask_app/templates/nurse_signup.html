@@ -13,13 +13,13 @@
         <div class="container-fluid d-flex">
             <span class="navbar-brand mb-0 h1">nursesCloud</span>
             <div>
-                <a href="#" class="link-primary">Nurse Login</a> |
+                <a href="/nurses/login" class="link-primary">Nurse Login</a> |
                 <a href="#" class="link-primary">Facility Login</a>
             </div>
         </div>
     </nav>
     <div class="container d-flex justify-content-center">
-        <form action="/nurses/register" method="post">
+        <form action="/nurses/register" method="POST">
             <div class="mb-3">
                 <h1 class="text-center">Nurses!</h1>
                 <h3 class="text-center">Let's get signed up!</h3>
@@ -45,8 +45,8 @@
                 <input type="password" name="confirm">
             </div>
             <div class="mb-3">
-                <button class="btn btn-primary">Continue</button>
-                <a href=""class="ms-3">I have already signed up!</a>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <a href="/facility/register"class="ms-3">Need to signup under facility?</a>
             </div>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
