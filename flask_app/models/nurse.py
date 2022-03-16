@@ -92,4 +92,4 @@ class Nurse:
         if nurse['password'] != nurse['confirm']:
             flash("Passwords don't match!")
             is_valid = False
-            return is_valid
+        return is_valid

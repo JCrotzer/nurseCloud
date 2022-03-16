@@ -1,7 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.nurse import Nurse
-
+from flask_app.models.facility import Facility
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -18,10 +18,8 @@ def register_nurse():
         "email": request.form['email'],
         "password": bcrypt.generate_password_hash(request.form['password'])
     }
-    this_nurse = Nurse.create_nurse(data)
-    print (this_nurse)
     session['nurse_id'] = Nurse.create_nurse(data)
-    return redirect('/nurses/skills')
+    return redirect('/nurses/dashboard')
 
 @app.route('/nurses/login', methods=['POST'])
 def login_nurse():
@@ -33,7 +31,7 @@ def login_nurse():
         flash("Invalid Email/Password")
         return redirect('/')
     session['nurse_id'] = this_nurse.id
-    return redirect('/dashboard')
+    return redirect('/nurses/dashboard')
 
 
 # READ
@@ -61,9 +59,10 @@ def certs_skills():
     this_nurse = Nurse.read_by_id(data)
     return render_template('certs_skills.html', nurse = this_nurse)
 
-@app.route('/dashboard')
+@app.route('/nurses/dashboard')
 def dashboard():
     if "nurse_id" not in session:
+        print('hello world')
         flash("You must be logged in to view this page")
         return redirect('/')
     data = {
@@ -71,3 +70,8 @@ def dashboard():
     }
     this_nurse = Nurse.read_by_id(data)
     return render_template('dashboard.html', nurse = this_nurse)
+
+@app.route('/logout')
+def logout():
+    session.pop("nurse_id")
+    return redirect('/')
