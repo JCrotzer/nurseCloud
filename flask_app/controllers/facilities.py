@@ -2,6 +2,7 @@ from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.facility import Facility
 from flask_app.models.nurse import Nurse
+from flask_app.models.assignment import Assignment
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -47,9 +48,10 @@ def facility_dashboard():
         "id": session['facility_id']
     }
     this_facility = Facility.read_by_id(data)
-    return render_template('dashboard.html', facility = this_facility)
+    all_assignments = Assignment.read_all_assignments()
+    return render_template('dashboard.html', facility = this_facility, all_assignments = all_assignments)
 
-@app.route('/logout')
+@app.route('/facility/logout')
 def logout_facility():
     session.pop("facility_id")
     return redirect('/')

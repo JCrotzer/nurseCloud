@@ -9,7 +9,7 @@
     <title>Nurse Signup</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light mb-3">
+    <nav class="navbar navbar-light bg-light mb-5">
         <div class="container-fluid d-flex">
             <span class="navbar-brand mb-0 h1">nursesCloud</span>
             <div>
@@ -18,7 +18,7 @@
             </div>
         </div>
     </nav>
-    <div class="container d-flex justify-content-center">
+    <div class="container signup d-flex justify-content-center">
         <form action="/nurses/register" method="POST">
             <div class="mb-3">
                 <h1 class="text-center">Nurses!</h1>
@@ -45,8 +45,8 @@
                 <input type="password" name="confirm">
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Register</button>
-                <a href="/facility/register"class="ms-3">Need to signup under facility?</a>
+                <button type="submit" class="btn btn-primary text-dark">Register</button>
+                <a href="/facility/register"class="ms-3 text-decoration-none text-dark">Need to signup under facility?</a>
             </div>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}

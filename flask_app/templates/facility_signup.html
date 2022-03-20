@@ -18,7 +18,7 @@
             </div>
         </div>
     </nav>
-        <div class="container d-flex justify-content-center">
+        <div class="container signup p-5 d-flex justify-content-center">
             <form action="/facility/register" method="POST">
                 <div class="mb-3">
                     <h1 class="text-center">Facility Signup</h1>
@@ -40,8 +40,8 @@
                     <input type="password" name="confirm">
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Register</button>
-                    <a href="/facility/login"class="ms-3">I have already signed up!</a>
+                    <button type="submit" class="btn btn-primary text-dark">Register</button>
+                    <a href="/facility/login"class="ms-3 text-decoration-none text-dark">I have already signed up!</a>
                 </div>
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}

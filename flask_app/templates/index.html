@@ -9,19 +9,25 @@
     <title>nursesCloud</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">nursesCloud</span>
-        <div>
-            <a href="/nurses/login" class="link-primary">Nurse Login</a> |
-            <a href="/facility/login" class="link-primary">Facility Login</a> |
-            <a href="/nurses/register" class="link-primary">Signup</a>
-        </div>
-        </div>
-    </nav>
-    <main class="container mt-5">
-        <h1>Welcome to nursesCloud!</h1>
-        <h3>We can help you find an assignment just for you!</h3>
-    </main>
+    <div class="container-md">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <span class="navbar-brand mb-0 h1">nursesCloud</span>
+            <div>
+                <a href="/nurses/login" class="link-primary">Nurse Login</a> |
+                <a href="/facility/login" class="link-primary">Facility Login</a> |
+                <a href="/nurses/register" class="link-primary">Signup</a>
+            </div>
+            </div>
+        </nav>
+        <main>
+            <img class="pic1" src="{{ url_for('static', filename='img/nurse_pic1.jpg') }}">
+            <div class="welcome">
+                <h1 class="text-primary">Welcome to nursesCloud!</h1>
+                <h5>We can help you find your next assignment!</h5>
+            </div>
+            <img class="pic3" src="{{ url_for('static', filename='img/nurse_pic3.jpg') }}">
+        </main>
+    </div>
 </body>
 </html>

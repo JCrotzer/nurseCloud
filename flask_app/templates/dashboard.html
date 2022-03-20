@@ -12,18 +12,52 @@
     <nav class="navbar navbar-light bg-light text-primary align-items-center">
         <div class="container-fluid d-flex justify-content-space-between">
             <h2>nursesCloud</h2>
-            <a href="/logout">Logout</a>
+            <div>
+                {% if 'nurse_id' in session %}
+                <a href="/nurse/logout" class="text-decoration-none">Nurse Logout</a> 
+                {% endif %}
+                {% if 'facility_id' in session %}
+                <a href="/facility/logout" class="text-decoration-none">Facility Logout</a>
+                {% endif %}
+            </div>
         </div>
     </nav>
-    <main class="container d-flex">
-        <div class="col-4 mt-5 p-3 left border border-dark border-2 rounded-1 justify-content-start">
-            <h4>Available Jobs</h4>
-            <div><a href="">ER</a></div>
-            <div><a href="">ICU</a></div>
-            <div><a href="">MedSurg/Tele</a></div>
+        <div class="d-flex justify-content-between">
+            {% if 'facility_id' in session %}
+            <a href="/assignments/new" class="btn btn-primary text-decoration-none m-4 fs-5">List a New assignment!</a>
+            {% endif %}
+            <h3 class="text-align-center m-4">Featured Jobs!</h3>
         </div>
-        <div class="col-6 mt-3 ms-5 right d-flex justify-content-end">
-            <h3 class="text-align-center">Featured Jobs!</h3>
+    <main class="container d-flex">
+        <div class="col-4 mt-2 p-3 left rounded-1 justify-content-start">
+            {% if 'nurse_id' in session %}
+            <h4>Available Jobs</h4>
+            <div><a href="/er/jobs">ER</a></div>
+            <div><a href="/icu/jobs">ICU</a></div>
+            <div><a href="/med_surg/jobs">MedSurg/Tele</a></div>
+            {% endif %}
+        </div>
+        <div class="col-8 mt-1 ms-5 right">
+            <div class="card border-dark">
+                <div class="card-body">
+                    {% for assignment in all_assignments %}
+                    <h5 class="card-title">{{ assignment.hospital }}</h5>
+                        <p class="card-text">{{ assignment.speciality }} | {{ assignment.state }}</p>
+                        <p class="card-text">{{ assignment.hours }} hours {{ assignment.shift }}</p>
+                        <p class="card-text">{{ assignment.weeks }} weeks   Start date: {{ assignment.starting_date }}</p>
+                        <p class="card-text">Certifications: {{ assignment.certifications }}</p> 
+                        <p class="card-text">Skills: {{ assignment.skills }}</p>
+                        <p class="card-text">Phone# {{ assignment.phone_number }}</p>
+                        <hr>
+                        {% for facility in assignment.facility %}
+                            {% if facility.id == session["facility_id"] %}
+                        <a href="/assignments/edit/{{assignment.id}}">Edit</a> |
+                        <a href="/assignments/delete/{{assignment.id}}">Delete</a>
+                            {% endif %}
+                        {% endfor %} 
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </main>
 </body>
